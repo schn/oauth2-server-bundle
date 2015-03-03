@@ -40,6 +40,10 @@ class AuthorizeController extends Controller
     {
         $server = $this->get('oauth2.server');
 
-        return $server->handleAuthorizeRequest($this->get('oauth2.request'), $this->get('oauth2.response'), true);
+        if (null === $this->getUser()) {
+            return new Response('need authorization', 401);
+        }
+        return $server->handleAuthorizeRequest($this->get('oauth2.request'), $this->get('oauth2.response'), true, $this->getUser()->getUsername());
     }
+}
 }

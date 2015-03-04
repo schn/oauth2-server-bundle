@@ -5,7 +5,6 @@ namespace OAuth2\ServerBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthorizeController extends Controller
@@ -13,37 +12,16 @@ class AuthorizeController extends Controller
     /**
      * @Route("/authorize", name="_authorize_validate")
      * @Method({"GET"})
-     * @Template("OAuth2ServerBundle:Authorize:authorize.html.twig")
      */
     public function validateAuthorizeAction()
     {
         $server = $this->get('oauth2.server');
 
+
         if (!$server->validateAuthorizeRequest($this->get('oauth2.request'), $this->get('oauth2.response'))) {
             return $server->getResponse();
         }
 
-        // Get descriptions for scopes if available
-        $scopes = array();
-        $scopeStorage = $this->get('oauth2.storage.scope');
-        foreach (explode(' ', $this->get('oauth2.request')->query->get('scope')) as $scope) {
-            $scopes[] = $scopeStorage->getDescriptionForScope($scope);
-        }
-
-        return array('request' => $this->get('oauth2.request')->query->all(), 'scopes' => $scopes);
-    }
-
-    /**
-     * @Route("/authorize", name="_authorize_handle")
-     * @Method({"POST"})
-     */
-    public function handleAuthorizeAction()
-    {
-        $server = $this->get('oauth2.server');
-
-        if (null === $this->getUser()) {
-            return new Response('need authorization', 401);
-        }
         return $server->handleAuthorizeRequest($this->get('oauth2.request'), $this->get('oauth2.response'), true, $this->getUser()->getUsername());
     }
 }

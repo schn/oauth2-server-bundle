@@ -2,10 +2,15 @@ OAuth2\ServerBundle\Entity\User:
     type: entity
     table: oauth_user
     id:
+        id:
+            type:       integer
+            generator:
+              strategy: AUTO
+    fields:
         username:
             type:       string
             length:     255
-    fields:
+            unique:     true
         password:
             type:       string
             length:     255

@@ -9,6 +9,12 @@ use OAuth2\ServerBundle\User\OAuth2UserInterface;
  */
 class User implements OAuth2UserInterface
 {
+
+    /**
+     * @var
+     */
+    private $id;
+
     /**
      * @var string
      */
@@ -33,6 +39,23 @@ class User implements OAuth2UserInterface
      * @var array
      */
     private $scopes;
+
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
     /**
      * Set username

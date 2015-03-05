@@ -22,6 +22,6 @@ class AuthorizeController extends Controller
             return $server->getResponse();
         }
 
-        return $server->handleAuthorizeRequest($this->get('oauth2.request'), $this->get('oauth2.response'), true, $this->getUser()->getUsername());
+        return $server->handleAuthorizeRequest($this->get('oauth2.request'), $this->get('oauth2.response'), true, $this->getUser()->getId());
     }
 }

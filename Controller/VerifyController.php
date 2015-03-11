@@ -25,6 +25,10 @@ class VerifyController extends Controller
 
         $tokenData = $server->getAccessTokenData($this->get('oauth2.request'), $this->get('oauth2.response'));
 
+        $userProvider = $this->get('oauth2.user_provider');
+        $user = $userProvider->loadUserById($tokenData['user_id']);
+        $tokenData['user'] = $user->toArray();
+
         return new JsonResponse($tokenData);
     }
 }

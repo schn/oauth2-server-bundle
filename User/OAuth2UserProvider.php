@@ -47,6 +47,31 @@ class OAuth2UserProvider implements UserProviderInterface
     }
 
     /**
+     * Loads the user by given id
+     *
+     * This method must throw UsernameNotFoundException if the user is not
+     * found.
+     *
+     * @param int $userId user identifier
+     *
+     * @return UserInterface
+     *
+     * @see UsernameNotFoundException
+     *
+     * @throws UsernameNotFoundException if the user is not found
+     */
+    public function loadUserById($userId)
+    {
+        $user = $this->em->getRepository('OAuth2ServerBundle:User')->findOneBy(['id' => $userId]);
+
+        if (!$user) {
+            throw new UsernameNotFoundException(sprintf('User with id "%s" not found.', $userId));
+        }
+
+        return $user;
+    }
+
+    /**
      * Refreshes the user for the account interface.
      *
      * It is up to the implementation to decide if the user data should be

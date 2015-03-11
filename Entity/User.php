@@ -191,4 +191,18 @@ class User implements OAuth2UserInterface
     {
         // We don't hold anything sensitivie, do nothing
     }
+
+    /**
+     * Return a array representation of user
+     * @return array key => value
+     */
+    public function toArray()
+    {
+        return [
+            'id' => $this->getId(),
+            'username' => $this->getUsername(),
+            'roles' => $this->getRoles(),
+            'scope' => $this->getScope()
+        ];
+    }
 }

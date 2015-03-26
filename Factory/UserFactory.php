@@ -20,23 +20,66 @@ class UserFactory
         $this->encoderFactory = $encoderFactory;
     }
 
-    public function create(array $data)
+    /**
+     * Создать нового пользователя
+     *
+     * @param array $data
+     * @return null|\OAuth2\ServerBundle\Entity\User|object
+     */
+    public function createNew(array $data)
     {
         if (empty($data)) {
-            throw new ParameterNotFoundException("user data for create/update not found");
+            throw new ParameterNotFoundException("You must provide data for user create");
+        }
+        $user = new \OAuth2\ServerBundle\Entity\User();
+
+        if (empty($data['username'])) {
+            throw new ParameterNotFoundException("You must provide data.username for new user");
+        }
+        $user->setUsername($data['username']);
+
+
+        if (empty($data['password'])) {
+            throw new ParameterNotFoundException("You must provide data.password for new user");
+        }
+        $salt = $this->generateSalt();
+        $password = $this->encoderFactory->getEncoder($user)->encodePassword($data['password'], $salt);
+
+        $user->setSalt($salt);
+        $user->setPassword($password);
+
+        if (!empty($data['roles'])) {
+            $user->setRoles($data['roles']);
         }
 
-        if (isset($data['id'])) {
-            $user = $this->userRepository->findOneBy(['id' => $data['id']]);
-        } else {
-            $user = new \OAuth2\ServerBundle\Entity\User();
+        if (!empty($data['scopes'])) {
+            $user->setScopes($data['scopes']);
         }
 
-        if (isset($data['username'])) {
+        return $user;
+    }
+
+    /**
+     * Накатить данные на существующего пользователя
+     *
+     * @param array $data
+     */
+    public function createExists(array $data)
+    {
+        if (empty($data)) {
+            throw new ParameterNotFoundException("You must provide data for user update");
+        }
+
+        if (empty($data['id'])) {
+            throw new ParameterNotFoundException("You must provide data.id to update user");
+        }
+        $user = $this->userRepository->findOneBy(['id' => $data['id']]);
+
+        if (!empty($data['username'])) {
             $user->setUsername($data['username']);
         }
 
-        if (isset($data['password'])) {
+        if (!empty($data['password'])) {
             $salt = $this->generateSalt();
             $password = $this->encoderFactory->getEncoder($user)->encodePassword($data['password'], $salt);
 
@@ -44,11 +87,11 @@ class UserFactory
             $user->setPassword($password);
         }
 
-        if (isset($data['roles'])) {
+        if (!empty($data['roles'])) {
             $user->setRoles($data['roles']);
         }
 
-        if (isset($data['scopes'])) {
+        if (!empty($data['scopes'])) {
             $user->setScopes($data['scopes']);
         }
 

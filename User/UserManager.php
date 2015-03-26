@@ -31,7 +31,7 @@ class UserManager
      */
     public function create(array $data)
     {
-        $user = $this->userFactory->create($data);
+        $user = $this->userFactory->createNew($data);
         $this->em->persist($user);
         $this->em->flush();
         return $user;
@@ -42,7 +42,7 @@ class UserManager
      */
     public function update(array $data)
     {
-        $user = $this->userFactory->create($data);
+        $user = $this->userFactory->createExists($data);
         $this->em->persist($user);
         $this->em->flush();
         return $user;
@@ -54,7 +54,7 @@ class UserManager
     public function delete($id)
     {
         if (is_null($id)) {
-            throw new ParameterNotFoundException("Please provide id for this action!");
+            throw new ParameterNotFoundException("Please provide id to delete user");
         }
 
         $user = $this->get($id);
@@ -78,7 +78,7 @@ class UserManager
     public function get($id)
     {
         if (is_null($id)) {
-            throw new ParameterNotFoundException("Please provide id for this action!");
+            throw new ParameterNotFoundException("Please provide id get user");
         }
 
         $user = $this->repository->findOneBy(['id' => $id]);

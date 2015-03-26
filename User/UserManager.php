@@ -2,6 +2,7 @@
 
 namespace OAuth2\ServerBundle\User;
 use Doctrine\ORM\EntityManager;
+use OAuth2\ServerBundle\Exception\Oauth2Exception;
 use OAuth2\ServerBundle\Factory\UserFactory;
 use Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
 
@@ -68,7 +69,7 @@ class UserManager
      */
     public function find(array $criteria = [])
     {
-        return $this->repository->find($criteria);
+        return $this->repository->findBy($criteria);
     }
 
     /**
@@ -80,6 +81,12 @@ class UserManager
             throw new ParameterNotFoundException("Please provide id for this action!");
         }
 
-        return $this->repository->findOneBy(['id' => $id]);
+        $user = $this->repository->findOneBy(['id' => $id]);
+
+        if (is_null($user)) {
+            throw Oauth2Exception::cantFindUserWithId($id);
+        }
+
+        return $user;
     }
 } 

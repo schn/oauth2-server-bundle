@@ -33,12 +33,12 @@ class User implements OAuth2UserInterface
     /**
      * @var array
      */
-    private $roles;
+    private $roles = [];
 
     /**
      * @var array
      */
-    private $scopes;
+    private $scopes = [];
 
 
     /**

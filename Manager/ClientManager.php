@@ -64,7 +64,7 @@ class ClientManager
      *
      * @return A secret
      */
-    protected function generateSecret()
+    public function generateSecret()
     {
         return base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
     }

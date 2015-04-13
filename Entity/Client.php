@@ -173,4 +173,32 @@ class Client
     {
         return $this->public_key;
     }
+
+    /**
+     * Array representation of Client
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return [
+            'client_id' => $this->getClientId(),
+            'client_secret' => $this->getClientSecret(),
+            'redirect_uri' => $this->getRedirectUri(),
+            'grant_types' => $this->getGrantTypes(),
+            'public_key' => $this->getPublicKey()
+        ];
+    }
+
+    /**
+     * String implementation of Client application
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getClientId();
+    }
+
+
 }

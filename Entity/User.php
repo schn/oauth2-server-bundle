@@ -205,4 +205,12 @@ class User implements OAuth2UserInterface
             'scope' => $this->getScope()
         ];
     }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return is_null($this->username) ? '' : $this->username;
+    }
 }

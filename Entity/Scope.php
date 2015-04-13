@@ -62,4 +62,16 @@ class Scope
     {
         return $this->description;
     }
+
+    /**
+     * String representations of Scope
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getScope();
+    }
+
+
 }

@@ -66,10 +66,14 @@ class UserManager
 
     /**
      * Find users by criteria
+     * @param array criteria array('name' => 'foo')
+     * @param array orderBy array('price' => 'ASC')
+     * @param integer limit
+     * @param integer offset
      */
-    public function find(array $criteria = [])
+    public function find(array $criteria = [], array $orderBy = null, $limit = null, $offset = null)
     {
-        return $this->repository->findBy($criteria);
+        return $this->repository->findBy($criteria, $orderBy, $limit, $offset);
     }
 
     /**

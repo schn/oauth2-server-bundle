@@ -23,11 +23,8 @@ class UserManager
     }
 
     /**
-     * @param $username
-     * @param $password
-     * @param array $roles
-     * @param array $scopes
-     * @return bool
+     * @param $data
+     * @return null|\OAuth2\ServerBundle\Entity\User|object
      */
     public function create(array $data)
     {

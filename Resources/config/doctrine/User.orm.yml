@@ -11,6 +11,18 @@ OAuth2\ServerBundle\Entity\User:
             type:       string
             length:     255
             unique:     true
+        firstname:
+            type:       string
+            length:     255
+            nullable:   true
+        lastname:
+            type:       string
+            length:     255
+            nullable:   true
+        middlename:
+            type:       string
+            length:     255
+            nullable:   true
         password:
             type:       string
             length:     255
@@ -23,4 +35,12 @@ OAuth2\ServerBundle\Entity\User:
         scopes:
             type:       simple_array
             nullable:   true
+        birthdate:
+            type:       date
+            nullable:   true
+        email:
+            type:       string
+            lenght:     100
+            nullable:   true
+            unique:     true
     lifecycleCallbacks: {  }

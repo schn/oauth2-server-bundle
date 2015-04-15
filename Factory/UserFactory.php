@@ -34,10 +34,14 @@ class UserFactory
         $user = new \OAuth2\ServerBundle\Entity\User();
 
         if (empty($data['username'])) {
-            throw new ParameterNotFoundException("You must provide data.username for new user");
+            throw new ParameterNotFoundException("You must provide data.login for new user");
         }
         $user->setUsername($data['username']);
 
+        if (empty($data['email'])) {
+            throw new ParameterNotFoundException("You must provide data.email for new user");
+        }
+        $user->setEmail($data['email']);
 
         if (empty($data['password'])) {
             throw new ParameterNotFoundException("You must provide data.password for new user");
@@ -54,6 +58,22 @@ class UserFactory
 
         if (!empty($data['scopes'])) {
             $user->setScopes($data['scopes']);
+        }
+
+        if (!empty($data['firstname'])) {
+            $user->setFirstName($data['firstname']);
+        }
+
+        if (!empty($data['lastname'])) {
+            $user->setLastName($data['lastname']);
+        }
+
+        if (!empty($data['middlename'])) {
+            $user->setMiddleName($data['middlename']);
+        }
+
+        if (!empty($data['birthdate'])) {
+            $user->setBirthDate($data['birthdate']);
         }
 
         return $user;
@@ -95,6 +115,22 @@ class UserFactory
             $user->setScopes($data['scopes']);
         }
 
+        if (!empty($data['firstname'])) {
+            $user->setFirstName($data['firstname']);
+        }
+
+        if (!empty($data['lastname'])) {
+            $user->setLastName($data['lastname']);
+        }
+
+        if (!empty($data['middlename'])) {
+            $user->setMiddleName($data['middlename']);
+        }
+
+        if (!empty($data['birthdate'])) {
+            $user->setBirthDate($data['birthdate']);
+        }
+
         return $user;
     }
 
@@ -103,8 +139,13 @@ class UserFactory
      *
      * @return string salt
      */
-    private function generateSalt()
+    public function generateSalt()
     {
         return base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
+    }
+
+    public function getEncoderFactory()
+    {
+        return $this->encoderFactory;
     }
 } 

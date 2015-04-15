@@ -23,6 +23,21 @@ class User implements OAuth2UserInterface
     /**
      * @var string
      */
+    private $firstname;
+
+    /**
+     * @var string
+     */
+    private $lastname;
+
+    /**
+     * @var string
+     */
+    private $middlename;
+
+    /**
+     * @var string
+     */
     private $password;
 
     /**
@@ -40,6 +55,15 @@ class User implements OAuth2UserInterface
      */
     private $scopes = [];
 
+    /**
+     * @var datetime
+     */
+    private $birthdate;
+
+    /**
+     * @var string
+     */
+    private $email;
 
     /**
      * @return mixed
@@ -58,8 +82,6 @@ class User implements OAuth2UserInterface
     }
 
     /**
-     * Set username
-     *
      * @param  string $username
      * @return User
      */
@@ -71,13 +93,80 @@ class User implements OAuth2UserInterface
     }
 
     /**
-     * Get username
-     *
      * @return string
      */
     public function getUsername()
     {
         return $this->username;
+    }
+
+    /**
+     * Set FirstName
+     *
+     * @param  string $firstName
+     * @return User
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstname = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * Get FirstName
+     *
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return $this->firstname;
+    }
+
+    /**
+     * Set LastName
+     *
+     * @param  string $lastName
+     * @return User
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastname = $lastName;
+
+        return $this;
+    }
+
+    /**
+     * Get LastName
+     *
+     * @return string
+     */
+    public function getLastName()
+    {
+        return $this->lastname;
+    }
+
+    /**
+     * Get MiddleName
+     *
+     * @return string
+     */
+    public function getMiddleName()
+    {
+        return $this->middlename;
+    }
+
+    /**
+     * Set MiddleName
+     *
+     * @param  string $middleName
+     * @return User
+     */
+    public function setMiddleName($middleName)
+    {
+        $this->middlename = $middleName;
+
+        return $this;
     }
 
     /**
@@ -183,6 +272,52 @@ class User implements OAuth2UserInterface
     }
 
     /**
+     * Set Email
+     *
+     * @param  string $email
+     * @return User
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get Email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set BirthDate
+     *
+     * @param  datetime $birthDate
+     * @return User
+     */
+    public function setBirthDate($birthDate)
+    {
+        $this->birthdate = $birthDate;
+
+        return $this;
+    }
+
+    /**
+     * Get BirthDate
+     *
+     * @return string
+     */
+    public function getBirthDate()
+    {
+        return $this->birthdate;
+    }
+
+    /**
      * Erase credentials
      *
      * @return void
@@ -202,8 +337,18 @@ class User implements OAuth2UserInterface
             'id' => $this->getId(),
             'username' => $this->getUsername(),
             'roles' => $this->getRoles(),
-            'scope' => $this->getScope()
+            'scope' => $this->getScope(),
+            'firstname' => $this->getFirstName(),
+            'lastname' => $this->getLastName(),
+            'middlename' => $this->getMiddleName(),
+            'email' => $this->getEmail(),
+            'birthdate' => $this->getBirthDate()
         ];
+    }
+
+    public function getFIO()
+    {
+        return $this->lastname . ' ' . $this->firstname . ' ' . $this->middlename;
     }
 
     /**
@@ -211,6 +356,14 @@ class User implements OAuth2UserInterface
      */
     public function __toString()
     {
-        return is_null($this->username) ? '' : $this->username;
+        return is_null($this->getUsername()) ? '' : $this->getUsername();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isNew()
+    {
+        return !$this->id ? true : false;
     }
 }

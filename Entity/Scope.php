@@ -8,6 +8,11 @@ namespace OAuth2\ServerBundle\Entity;
 class Scope
 {
     /**
+     * @var integer
+     */
+    private $id;
+
+    /**
      * @var string
      */
     private $scope;
@@ -16,6 +21,14 @@ class Scope
      * @var string
      */
     private $description;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set scope
@@ -62,16 +75,4 @@ class Scope
     {
         return $this->description;
     }
-
-    /**
-     * String representations of Scope
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->getScope();
-    }
-
-
 }

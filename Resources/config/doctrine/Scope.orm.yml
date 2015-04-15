@@ -2,10 +2,15 @@ OAuth2\ServerBundle\Entity\Scope:
     type: entity
     table: oauth_scope
     id:
+        id:
+            type:       integer
+            generator:
+              strategy: AUTO
+    fields:
         scope:
             type:       string
             length:     255
-    fields:
+            unique:     true
         description:
             type:       string
             length:     255

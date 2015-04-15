@@ -23,11 +23,8 @@ class UserManager
     }
 
     /**
-     * @param $username
-     * @param $password
-     * @param array $roles
-     * @param array $scopes
-     * @return bool
+     * @param $data
+     * @return null|\OAuth2\ServerBundle\Entity\User|object
      */
     public function create(array $data)
     {
@@ -66,14 +63,10 @@ class UserManager
 
     /**
      * Find users by criteria
-     * @param array criteria array('name' => 'foo')
-     * @param array orderBy array('price' => 'ASC')
-     * @param integer limit
-     * @param integer offset
      */
-    public function find(array $criteria = [], array $orderBy = null, $limit = null, $offset = null)
+    public function find(array $criteria = [])
     {
-        return $this->repository->findBy($criteria, $orderBy, $limit, $offset);
+        return $this->repository->findBy($criteria);
     }
 
     /**

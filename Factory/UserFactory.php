@@ -38,11 +38,6 @@ class UserFactory
         }
         $user->setUsername($data['username']);
 
-        if (empty($data['email'])) {
-            throw new ParameterNotFoundException("You must provide data.email for new user");
-        }
-        $user->setEmail($data['email']);
-
         if (empty($data['password'])) {
             throw new ParameterNotFoundException("You must provide data.password for new user");
         }
@@ -51,6 +46,10 @@ class UserFactory
 
         $user->setSalt($salt);
         $user->setPassword($password);
+
+        if (!empty($data['email'])) {
+            $user->setEmail($data['email']);
+        }
 
         if (!empty($data['roles'])) {
             $user->setRoles($data['roles']);

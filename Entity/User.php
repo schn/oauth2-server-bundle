@@ -366,4 +366,17 @@ class User implements OAuth2UserInterface
     {
         return !$this->id ? true : false;
     }
+
+    /**
+     * @return string
+     */
+    public function getRolesAsString()
+    {
+        $roles = array();
+        foreach ($this->getRoles() as $role) {
+            $roles[] = $role;
+        }
+
+        return implode(', ', $roles);
+    }
 }

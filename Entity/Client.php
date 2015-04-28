@@ -33,6 +33,11 @@ class Client
     private $public_key;
 
     /**
+     * @var string
+     */
+    private $homepage;
+
+    /**
      * Set client_id
      *
      * @param  string $clientId
@@ -172,5 +177,27 @@ class Client
     public function getPublicKey()
     {
         return $this->public_key;
+    }
+
+    /**
+     * Get homepage
+     *
+     * @return string
+     */
+    public function getHomepage()
+    {
+        return $this->homepage;
+    }
+
+    /**
+     * Set homepage
+     *
+     * @param $homepage
+     * @return $this
+     */
+    public function setHomepage($homepage)
+    {
+        $this->homepage = $homepage;
+        return $this;
     }
 }

@@ -17,4 +17,6 @@ OAuth2\ServerBundle\Entity\Client:
         scopes:
             type:       simple_array
             nullable:   true
+        homepage:
+            type:       string
     lifecycleCallbacks: {  }

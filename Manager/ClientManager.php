@@ -68,4 +68,20 @@ class ClientManager
     {
         return base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
     }
+
+    /**
+     * return all clients
+     *
+     * @param array $criteria
+     * @param array $orderBy
+     * @param null $limit
+     * @param null $offset
+     * @return array|bool
+     */
+    public function find(array $criteria=[], array $orderBy = null, $limit = null, $offset = null)
+    {
+        $clients = $this->em->getRepository('OAuth2ServerBundle:Client')->findBy($criteria, $orderBy, $limit, $offset);
+
+        return $clients;
+    }
 }

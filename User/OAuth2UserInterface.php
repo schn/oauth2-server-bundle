@@ -21,4 +21,6 @@ interface OAuth2UserInterface extends UserInterface
      * @return The user scope
      */
     public function getScope();
+
+    public function setScopes($scopes);
 }

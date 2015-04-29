@@ -4,11 +4,12 @@ namespace OAuth2\ServerBundle\Entity;
 
 use OAuth2\ServerBundle\User\OAuth2UserInterface;
 use FOS\UserBundle\Model\User as BaseUser;
+use UserManagementBundle\User\DicomUserInterface;
 
 /**
  * User
  */
-class User extends BaseUser implements OAuth2UserInterface
+class User extends BaseUser implements DicomUserInterface
 {
     /**
      * @var string

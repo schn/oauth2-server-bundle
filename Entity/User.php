@@ -3,23 +3,13 @@
 namespace OAuth2\ServerBundle\Entity;
 
 use OAuth2\ServerBundle\User\OAuth2UserInterface;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * User
  */
-class User implements OAuth2UserInterface
+class User extends BaseUser implements OAuth2UserInterface
 {
-
-    /**
-     * @var
-     */
-    private $id;
-
-    /**
-     * @var string
-     */
-    private $username;
-
     /**
      * @var string
      */
@@ -36,69 +26,15 @@ class User implements OAuth2UserInterface
     private $middlename;
 
     /**
-     * @var string
-     */
-    private $password;
-
-    /**
-     * @var string
-     */
-    private $salt;
-
-    /**
-     * @var array
-     */
-    private $roles = [];
-
-    /**
      * @var array
      */
     private $scopes = [];
 
     /**
-     * @var datetime
+     * @var \DateTime
      */
     private $birthdate;
 
-    /**
-     * @var string
-     */
-    private $email;
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @param  string $username
-     * @return User
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
 
     /**
      * Set FirstName
@@ -169,74 +105,6 @@ class User implements OAuth2UserInterface
         return $this;
     }
 
-    /**
-     * Set password
-     *
-     * @param  string $password
-     * @return User
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Get password
-     *
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * Set salt
-     *
-     * @param  string $salt
-     * @return User
-     */
-    public function setSalt($salt)
-    {
-        $this->salt = $salt;
-
-        return $this;
-    }
-
-    /**
-     * Get salt
-     *
-     * @return string
-     */
-    public function getSalt()
-    {
-        return $this->salt;
-    }
-
-    /**
-     * Set roles
-     *
-     * @param  array $roles
-     * @return User
-     */
-    public function setRoles($roles)
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
-
-    /**
-     * Get roles
-     *
-     * @return array
-     */
-    public function getRoles()
-    {
-        return $this->roles;
-    }
 
     /**
      * Set scopes
@@ -271,33 +139,12 @@ class User implements OAuth2UserInterface
         return implode(' ', $this->getScopes());
     }
 
-    /**
-     * Set Email
-     *
-     * @param  string $email
-     * @return User
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
 
-        return $this;
-    }
-
-    /**
-     * Get Email
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
 
     /**
      * Set BirthDate
      *
-     * @param  datetime $birthDate
+     * @param  \DateTime $birthDate
      * @return User
      */
     public function setBirthDate($birthDate)

@@ -5,6 +5,7 @@ namespace OAuth2\ServerBundle\Entity;
 use OAuth2\ServerBundle\User\OAuth2UserInterface;
 use FOS\UserBundle\Model\User as BaseUser;
 use UserManagementBundle\User\DicomUserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -36,6 +37,15 @@ class User extends BaseUser implements DicomUserInterface
      */
     private $birthdate;
 
+    /**
+     * @Assert\True(message="Username should not contain email")
+     */
+    public function isUsernameCheck()
+    {
+        $isUsernameCheck = ($this->username === $this->email || preg_match('/^(([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9\-]+)\.[a-zA-Z0-9\-.]+$)/', $this->username)) ? false : true;
+
+        return $isUsernameCheck;
+    }
 
     /**
      * Set FirstName

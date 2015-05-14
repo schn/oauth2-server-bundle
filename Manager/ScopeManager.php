@@ -43,7 +43,7 @@ class ScopeManager implements ScopeManagerInterface
      */
     public function findScopeByScope($scope)
     {
-        $scopeObject = $this->em->getRepository('OAuth2ServerBundle:Scope')->find($scope);
+        $scopeObject = $this->em->getRepository('OAuth2ServerBundle:Scope')->findOneBy(['scope' => $scope]);
 
         return $scopeObject;
     }

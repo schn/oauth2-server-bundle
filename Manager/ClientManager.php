@@ -31,15 +31,18 @@ class ClientManager
      *
      * @param array $scopes
      *
+     * @param string $homePage
+     *
      * @return Client
      */
-    public function createClient($identifier, array $redirect_uris = array(), array $grant_types = array(), array $scopes = array())
+    public function createClient($identifier, array $redirect_uris = array(), array $grant_types = array(), array $scopes = array(), $homePage)
     {
         $client = new \OAuth2\ServerBundle\Entity\Client();
         $client->setClientId($identifier);
         $client->setClientSecret($this->generateSecret());
         $client->setRedirectUri($redirect_uris);
         $client->setGrantTypes($grant_types);
+        $client->setHomepage($homePage);
 
         // Verify scopes
         foreach ($scopes as $scope) {

@@ -18,6 +18,7 @@ class CreateClientCommand extends ContainerAwareCommand
             ->addArgument('redirect_uri', InputArgument::REQUIRED, 'The client redirect uris (comma separated)')
             ->addArgument('grant_types', InputArgument::OPTIONAL, 'Grant types to restrict the client to (comma separated)')
             ->addArgument('scopes', InputArgument::OPTIONAL, 'Scopes to restrict the client to (comma separated)')
+            ->addArgument('homePage', InputArgument::OPTIONAL, 'The client homepage')
         ;
     }
 
@@ -31,7 +32,8 @@ class CreateClientCommand extends ContainerAwareCommand
                 $input->getArgument('identifier'),
                 explode(',', $input->getArgument('redirect_uri')),
                 explode(',', $input->getArgument('grant_types')),
-                explode(',', $input->getArgument('scopes'))
+                explode(',', $input->getArgument('scopes')),
+                $input->getArgument('homePage')
             );
         } catch (\Doctrine\DBAL\DBALException $e) {
             $output->writeln('<fg=red>Unable to create client ' . $input->getArgument('identifier') . '</fg=red>');
